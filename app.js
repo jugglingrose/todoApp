@@ -11,7 +11,7 @@ var MongoClient = require('mongodb').MongoClient;
 
 var mongo = require('mongodb');
 
-var mongo_uri = "mongodb://jugglingrose:gAXlgS0sRV6ph3Fk@cluster0-shard-00-00-3zgpt.mongodb.net:27017,cluster0-shard-00-01-3zgpt.mongodb.net:27017,cluster0-shard-00-02-3zgpt.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
+var config = require('./config');
 
 var db = null;
 
@@ -71,49 +71,7 @@ app.delete('/todo_list/:blah', function(req, res){
 
 
 
-
-/*Insert
-
-MongoClient.connect(mongo_uri, function(err, db) {
-  if (err) throw err;
-  var myobj = { title: "blah!" };
-  db.collection("todo").insertOne(myobj, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-  });
-});
-
-
-/*Find
-
-MongoClient.connect(mongo_uri, function(err, db) {
-  if (err) throw err;
-  db.collection("todo").findOne({title: "take out the trash"}, function(err, result) {
-    if (err) throw err;
-    console.log("sucessfully found");
-    console.log(result);
-  });
-});
-
-
-/*DELETE
-MongoClient.connect(mongo_uri, function(err, db) {
-  if (err) throw err;
-  var myquery = { title: "shake yo butt!" };
-  db.collection("todo").deleteOne(myquery, function(err, obj) {
-    if (err) throw err;
-    console.log("1 document deleted");
-  });
-});
-
-app.get('/hello', function (req, res){
-  console.log("blah");
-  var collection = db.collection('documents');
-  res.send('hello');
-});
-*/
-
-MongoClient.connect(mongo_uri, function(err, database) {
+MongoClient.connect(config.mongo_uri, function(err, database) {
   if (err) throw err;
   console.log('sucessfuly connected to database');
   db = database;
@@ -121,17 +79,3 @@ MongoClient.connect(mongo_uri, function(err, database) {
     console.log("successfully started the server");
   });
 });
-
-
-
-
-
-
-
-
-
-/*
-username: jugglingrose
-PW: gAXlgS0sRV6ph3Fk
-mongodb://jugglingrose:gAXlgS0sRV6ph3Fk@cluster0-shard-00-00-3zgpt.mongodb.net:27017,cluster0-shard-00-01-3zgpt.mongodb.net:27017,cluster0-shard-00-02-3zgpt.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin
-*/
