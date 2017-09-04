@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="todo.css">
+
+  <script src="todo.js"></script>
+</head>
+<body>
+    <div id="wrap" class="container">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h1>Today's Tasks</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <form id="new-task" method="POST" action="/">
+            <input id="add" type="text" name="item">
+            <input id="add" type="hidden" name="bad" value="something">
+
+            <button id="submit" type="submit" value="SUBMIT">Add Item</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <ul>
+            <% for (var i=0; i < todos.length; i++){ %>
+              <li class="todo-item" id="<%= todos[i]._id%>"> <%= todos[i].item %> <li>
+                <% } %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,19 @@
+{
+  "name": "to_do",
+  "version": "1.0.0",
+  "description": "to-do list app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "to-do"
+  ],
+  "author": "Corean Gonzales",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  }
+}
