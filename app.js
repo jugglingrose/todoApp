@@ -7,9 +7,9 @@ var bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 
-var mongo = require('mongodb');
 
 var config = require('./config');
 
@@ -75,7 +75,7 @@ MongoClient.connect(config.mongo_uri, function(err, database) {
   if (err) throw err;
   console.log('sucessfuly connected to database');
   db = database;
-  app.listen(3000, function (){
+  app.listen(8080, function (){
     console.log("successfully started the server");
   });
 });
