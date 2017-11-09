@@ -11,7 +11,7 @@ var mongo = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 
 
-var config = require('./config');
+var config = require('./config.secret');
 
 var db = null;
 
