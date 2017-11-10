@@ -13,6 +13,9 @@ var MongoClient = require('mongodb').MongoClient;
 
 var config = require('./config.secret');
 
+const expressMongoDb = require('express-mongo-db');
+app.use(expressMongoDb(config.mongo_url));
+
 var db = null;
 
 
@@ -24,7 +27,7 @@ app.use(express.static('assets'));
 
 app.get('/', function (req, res){
   /*when accessing app, include all data from the database*/
-  db.collection("todo").find({}).toArray(function(err, result) {
+  req.db.collection("todo").find({}).toArray(function(err, result) {
     if (err) throw err;
     console.log(result);
     /*if there are no errors, render the todo list UI pre-filled with to-do data*/
@@ -42,7 +45,7 @@ app.post('/', urlencodedParser, function(req, res){
   }
   /*if item is defined, take the item data and insert into database, redirect page
   so that all items in database show on the todo list*/
-  db.collection("todo").insertOne({'item': item}, function(err, result){
+  req.db.collection("todo").insertOne({'item': item}, function(err, result){
     if (err) throw err;
     console.log("1 document inserted");
     res.redirect('/');
@@ -62,7 +65,7 @@ DELETE /23456876543345678
 app.delete('/todo_list/:blah', function(req, res){
   console.log("delete has been called")
   var o_id = new mongo.ObjectID(req.params.blah);
-  db.collection("todo").deleteOne({'_id': o_id}, function(err, obj) {
+  req.db.collection("todo").deleteOne({'_id': o_id}, function(err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
     res.end();
@@ -70,12 +73,10 @@ app.delete('/todo_list/:blah', function(req, res){
 });
 
 
+if (require.main === module) {
+    app.listen(config.port, function() {
+        console.log("Local server started");
+    });
+}
 
-MongoClient.connect(config.mongo_uri, function(err, database) {
-  if (err) throw err;
-  console.log('sucessfuly connected to database');
-  db = database;
-  app.listen(8080, function (){
-    console.log("successfully started the server");
-  });
-});
+module.exports = app;
