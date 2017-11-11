@@ -14,7 +14,7 @@ var MongoClient = require('mongodb').MongoClient;
 var config = require('./config.secret');
 
 const expressMongoDb = require('express-mongo-db');
-app.use(expressMongoDb(config.mongo_url));
+app.use(expressMongoDb(config.mongo_uri));
 
 var db = null;
 
